@@ -1,0 +1,27 @@
+﻿
+using System.Text.RegularExpressions;
+
+public class Day
+{
+    const string day = "01";
+    static object Input()
+    {
+        var input = File.ReadLines($"input/2024_{day}_input.txt");
+
+        return input;
+    }
+
+    public static object Solve1()
+    {
+        var input = Input();
+
+        return input;
+    }
+
+    public static object Solve2()
+    {
+        var input = Input();
+
+        return input;
+    }
+}
