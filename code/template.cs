@@ -6,7 +6,7 @@ public class Day
     const string day = "01";
     static object Input()
     {
-        var input = File.ReadLines($"input/2024_{day}_input.txt");
+        var input = File.ReadLines($"input/2025_{day}_input.txt");
 
         return input;
     }
