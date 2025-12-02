@@ -1,2 +1,2 @@
-﻿Console.WriteLine(Day01.Solve1());
-Console.WriteLine(Day01.Solve2());
+﻿Console.WriteLine(Day02.Solve1());
+Console.WriteLine(Day02.Solve2());
