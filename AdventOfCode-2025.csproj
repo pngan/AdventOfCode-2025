@@ -16,7 +16,7 @@
     <None Update="input\2025_01_input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="input\2025_02_input - Copy.txt">
+    <None Update="input\2025_03_input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="input\2025_02_input.txt">
