@@ -33,7 +33,10 @@ public class Image2<T> where T : INumber<T>
 
     // Returns only neighbours in bounds
     public IEnumerable<(int r, int c )> Neighbours8((int r, int c ) p) => p.Neighbours8().Where(InBounds);
+    public IEnumerable<(int r, int c )> Neighbours8((int r, int c ) p, Func<T, bool> predicate) => p.Neighbours8().Where(InBounds).Where(p=>predicate(_image[p]));
     public IEnumerable<(int r, int c )> Neighbours4((int r, int c ) p) => p.Neighbours4().Where(InBounds);
+    public IEnumerable<(int r, int c)> Neighbours4((int r, int c) p, Func<T, bool> predicate) => p.Neighbours4().Where(InBounds).Where(p => predicate(_image[p]));
+
     public IEnumerable<(int r, int c )> EveryPoint() => _image.Keys;
 
     public bool Exists((int r, int c ) p) => _image.ContainsKey(p);
