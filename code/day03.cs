@@ -3,7 +3,7 @@
 public class Day03
 {
     const string day = "03";
-    static ImmutableArray<ImmutableArray<ulong>> Input() =>
+    public static ImmutableArray<ImmutableArray<ulong>> Input() =>
         File.ReadLines($"input/2025_{day}_input.txt")
             .Where(l => !string.IsNullOrEmpty(l))
             .Select(l => l.Select(c => ulong.Parse(c.ToString())).ToImmutableArray())

@@ -3,7 +3,7 @@ public class Day04
 {
     const string day = "04";
 
-    static CharImage2 Input() =>
+    public static CharImage2 Input() =>
         CharImage2.Parse(File.ReadLines($"input/2025_{day}_input.txt")
         .Where(l => !string.IsNullOrEmpty(l)));
 

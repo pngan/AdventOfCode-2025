@@ -2,7 +2,7 @@
 public class Day01
 {
     const string day = "01";
-    static List<(int value, int times)> Input()
+    public static List<(int value, int times)> Input()
     {
         var input = File.ReadLines($"input/2025_{day}_input.txt");
         List<(int value, int times)> result = new ();

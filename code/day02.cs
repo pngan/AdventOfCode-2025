@@ -5,7 +5,7 @@ public class Day02
 {
     const string day = "02";
 
-    static IImmutableList<(long a, long b)> Input() =>
+    public static IImmutableList<(long a, long b)> Input() =>
         File.ReadLines($"input/2025_{day}_input.txt").First()
             .Split(',')
             .Select(p => p.Split('-')

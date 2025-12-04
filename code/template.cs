@@ -4,7 +4,7 @@ using MoreLinq;
 public class Day
 {
     const string day = "01";
-    static object Input()
+    public static object Input()
     {
         var input = File.ReadLines($"input/2025_{day}_input.txt");
 
