@@ -25,6 +25,13 @@
     <None Update="input\2025_04_input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="input\2025_05_input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="utilities\numeric\" />
   </ItemGroup>
 
 </Project>

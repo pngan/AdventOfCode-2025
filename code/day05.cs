@@ -59,13 +59,7 @@ public class Day05
             freshRanges.Add(unionRange);
         }
 
-        ulong count = 0;
-        foreach(var r in freshRanges)
-        {
-            count += RangeLength(r);
-        }
-
-        return count;
+        return freshRanges.Aggregate(0UL, (acc, r) => acc + RangeLength(r));
     }
 
     public static bool Overlaps(Range x, Range y) 
