@@ -1,10 +1,10 @@
 ﻿using AdventureOfCode.Utilities.Image;
 public class Day04
 {
-    const string day = "04";
+    public const string Day = "04";
 
     public static CharImage2 Input() =>
-        CharImage2.Parse(File.ReadLines($"input/2025_{day}_input.txt")
+        CharImage2.Parse(File.ReadLines($"input/2025_{Day}_input.txt")
         .Where(l => !string.IsNullOrEmpty(l)));
 
     public static object Solve1()

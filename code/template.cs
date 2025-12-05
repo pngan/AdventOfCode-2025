@@ -1,12 +1,12 @@
 ﻿using System.Collections.Immutable;
 using MoreLinq;
 
-public class Day
+public class Day0
 {
-    const string day = "01";
+    public const string Day = "01";
     public static object Input()
     {
-        var input = File.ReadLines($"input/2025_{day}_input.txt");
+        var input = File.ReadLines($"input/2025_{Day}_input.txt");
 
         return input;
     }

@@ -3,10 +3,10 @@ using MoreLinq;
 
 public class Day02
 {
-    const string day = "02";
+    public const string Day = "02";
 
     public static IImmutableList<(long a, long b)> Input() =>
-        File.ReadLines($"input/2025_{day}_input.txt").First()
+        File.ReadLines($"input/2025_{Day}_input.txt").First()
             .Split(',')
             .Select(p => p.Split('-')
                           .Fold((a, b) => (long.Parse(a), long.Parse(b))))

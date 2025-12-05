@@ -3,9 +3,9 @@ using MoreLinq;
 using Range = (ulong a, ulong b);
 public class Day05
 {
-    const string day = "05";
+    public const string Day = "05";
     public static (Range[] ranges, ulong[] ids) Input() =>
-        File.ReadLines($"input/2025_{day}_input.txt").Split("").Fold((range, available) => (
+        File.ReadLines($"input/2025_{Day}_input.txt").Split("").Fold((range, available) => (
             range.Select(pair => pair.Split('-').Fold((start, end) => (ulong.Parse(start), ulong.Parse(end)))).ToArray(),
             available.Select(id => Convert.ToUInt64(id)).ToArray())); 
 
