@@ -1,5 +1,9 @@
 ﻿using System.Collections.Immutable;
 
+using AdventOfCode_2025.utilities.image;
+
+using AdventureOfCode.Utilities.Image;
+
 public class Day03
 {
     public const string Day = "03";
@@ -36,5 +40,12 @@ public class Day03
             joltage += j;
         }
         return joltage;
+    }
+
+
+    public static void Test()
+    {
+        ImageWriter iw = new();
+        iw.WriteImage(CharImage2.Parse(File.ReadLines($"input/2025_{Day}_input.txt")));
     }
 }

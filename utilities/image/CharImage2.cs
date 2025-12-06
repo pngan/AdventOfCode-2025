@@ -37,15 +37,31 @@ public class CharImage2 : Image2<char>
         return (CharImage2) result;
     }
 
-    public void DrawMap()
+    public void DrawMap(Dictionary<char, ConsoleColor>? colorMap = null)
     {
+        ConsoleColor originalColor = Console.ForegroundColor;
+        
         for (int r = 0; r < ROWS; r++)
         {
             for (int c = 0; c < COLS; c++)
             {
-                Console.Write(this[(r, c)]);
+                char ch = this[(r, c)];
+                
+                if (colorMap != null && colorMap.TryGetValue(ch, out ConsoleColor color))
+                {
+                    Console.ForegroundColor = color;
+                }
+                
+                Console.Write(ch);
+                
+                if (colorMap != null)
+                {
+                    Console.ForegroundColor = originalColor;
+                }
             }
             Console.WriteLine();
         }
+        
+        Console.ForegroundColor = originalColor;
     }
 }
