@@ -1,8 +1,8 @@
 ﻿Console.WriteLine();
-Console.Write( $"Day ");
-Console.WriteLine( $"{Day06.Day}");
-Console.WriteLine( $"{Day06.Solve1(), 20}");
-Console.WriteLine( $"{Day06.Solve2(), 20}");
+Console.Write($"Day ");
+Console.WriteLine($"{Day07.Day}");
+Console.WriteLine($"{Day07.Solve1(),20}");
+Console.WriteLine($"{Day07.Solve2(),20}");
 Console.WriteLine();
 Console.WriteLine();
 
@@ -13,6 +13,7 @@ Console.WriteLine();
 //Timing.Run(Day04.Day, Day04.Input, Day04.Solve1, Day04.Solve2);
 //Timing.Run(Day05.Day, Day05.Input, Day05.Solve1, Day05.Solve2);
 //Timing.Run(Day06.Day, Day06.Input, Day06.Solve1, Day06.Solve2);
+//Timing.Run(Day06.Day, Day07.Input, Day06.Solve1, Day06.Solve2);
 
 static public class Timing
 {

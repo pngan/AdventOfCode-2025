@@ -12,6 +12,13 @@ public class Image2<T> where T : INumber<T>
     {
         ROWS = rows; 
         COLS = cols;
+        for (int r = 0; r < ROWS; r++)
+        {
+            for (int c = 0; c < COLS; c++)
+            {
+                this[(r, c)] = default(T);
+            }
+        }
     }
 
     public T this[(int r, int c ) p]

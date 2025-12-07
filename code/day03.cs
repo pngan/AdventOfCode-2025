@@ -46,6 +46,20 @@ public class Day03
     public static void Test()
     {
         ImageWriter iw = new();
-        iw.WriteImage(CharImage2.Parse(File.ReadLines($"input/2025_{Day}_input.txt")));
+        var im = CharImage2.Parse(File.ReadLines($"input/2025_04_input.txt")
+            .Where(l => !string.IsNullOrEmpty(l)));
+        for (int f = 0; f < 200; f++)
+        {
+            for (int r = 0; r < im.ROWS; r++)
+            {
+                for (int c = 0; c < im.COLS; c++)
+                {
+                    im[(r, c)] = (char)f;
+                    //im[(r, c)] = (char)(((r + c) % 255));
+                }
+            }
+            iw.WriteImage(im, "temp", f);
+        }
+
     }
 }

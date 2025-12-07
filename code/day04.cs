@@ -1,4 +1,6 @@
-﻿using AdventureOfCode.Utilities.Image;
+﻿using AdventOfCode_2025.utilities.image;
+
+using AdventureOfCode.Utilities.Image;
 public class Day04
 {
     public const string Day = "04";
@@ -27,8 +29,12 @@ public class Day04
         var map = Input();
         ulong count = 0;
         ulong removed = 1;
+        ImageWriter iw = new();
+        int i = 0;
         while (removed > 0)
         {
+            iw.WriteImage(map, "temp", i++);
+
             removed = 0;
             var rolls = map.Find('@');
             foreach (var roll in rolls)

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 using AdventureOfCode.Utilities.Image;
 
@@ -8,7 +6,7 @@ namespace AdventOfCode_2025.utilities.image;
 
 internal class ImageWriter
 {
-    internal void WriteImage(CharImage2 image)
+    internal void WriteImage(CharImage2 image, string filename, int? sequence)
     {
         List<string> data = new();
         data.Add("P2");
@@ -19,11 +17,13 @@ internal class ImageWriter
             StringBuilder row = new();
             for (int c = 0; c < image.COLS; c++)
             {
-                row.Append($" {(r + c) % 255}");
+                //row.Append($" {(byte)(255-image[(r, c)])} {(byte)image[(r, c)]} {(byte)image[(r, c)]}");
+                row.Append($" {(int)image[(r, c)]}");
             }
             data.Add(row.ToString());
         }
 
-        File.WriteAllLines("tempimage.pgm", data);
+        filename = sequence.HasValue ? filename + $"{sequence:0000}.pgm" : filename + ".pgm"; 
+        File.WriteAllLines(filename, data);
     }
 }
