@@ -34,10 +34,9 @@
     <None Update="input\2025_07_input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="utilities\numeric\" />
+    <None Update="input\2025_08_input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
