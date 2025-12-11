@@ -1,8 +1,8 @@
 ﻿Console.WriteLine();
 Console.Write($"Day ");
-Console.WriteLine($"{Day09.Day}");
-Console.WriteLine($"{Day09.Solve1(),20}");
-Console.WriteLine($"{Day09.Solve2(),20}");
+Console.WriteLine($"{Day11.Day}");
+//Console.WriteLine($"{Day11.Solve1(),20}");
+Console.WriteLine($"{Day11.Solve2(),20}");
 Console.WriteLine();
 Console.WriteLine();
 
