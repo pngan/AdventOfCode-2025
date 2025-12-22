@@ -132,19 +132,6 @@ public class Day10
                 }
             }
 
-            if (unknowns > equations)
-            {
-                Console.WriteLine($"Number unknowns = {unknowns}, Number equations = {equations} - {unknowns - equations} - Underdetermined");
-            }
-            else if (unknowns == equations)
-            {
-                Console.WriteLine($"Number unknowns = {unknowns}, Number equations = {equations} - {unknowns - equations} - Potentially solvable");
-            }
-            else
-            {
-                Console.WriteLine($"Number unknowns = {unknowns}, Number equations = {equations} - {unknowns - equations} - Over determined");
-            }
-
             // Solve using Z3
             using (Context ctx = new Context())
             {
@@ -200,14 +187,15 @@ public class Day10
                 {
                     Model model = opt.Model;
 
-                    Console.WriteLine("Solution:");
-                    for (int i = 0; i < vars.Length; i++)
-                    {
-                        Console.WriteLine($"{vars[i]} = {model.Evaluate(vars[i])}");
-                    }
+                    // Uncomment to see intermediate results
+                    //Console.WriteLine("Solution:");
+                    //for (int i = 0; i < vars.Length; i++)
+                    //{
+                    //    Console.WriteLine($"{vars[i]} = {model.Evaluate(vars[i])}");
+                    //}
 
                     int solutionTotal = int.Parse(model.Evaluate(total).ToString());
-                    Console.WriteLine($"Total = {solutionTotal}");
+                    //Console.WriteLine($"Total = {solutionTotal}");
                     totalSum += solutionTotal;
                 }
                 else

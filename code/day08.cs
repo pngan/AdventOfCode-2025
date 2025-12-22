@@ -12,7 +12,7 @@ public class Day08
                           .Fold((x, y, z) => (long.Parse(x), long.Parse(y), long.Parse(z))));
 
     // Use BFS to do graph spanning - not the best way, but hey it's part 1, part 2 uses set merging instead
-    public static long Solve1()
+    public static object Solve1()
     {
         var junctions = Input();
         var pairsOrderedByDistance = CalculatePairDistances(junctions.ToArray())
@@ -59,7 +59,7 @@ public class Day08
     }
 
     // Represent circuits as sets, and merge sets using Union()
-    public static long Solve2()
+    public static object Solve2()
     {
         var junctions = Input().ToArray();
         var pairsOrderedByDistance = CalculatePairDistances(junctions.ToArray())

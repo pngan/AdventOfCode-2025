@@ -7,13 +7,18 @@ Console.WriteLine();
 Console.WriteLine();
 
 //Day03.Test();
-//Timing.Run(Day01.Day, Day01.Input, Day01.Solve1, Day01.Solve2);
-//Timing.Run(Day02.Day, Day02.Input, Day02.Solve1, Day02.Solve2);
-//Timing.Run(Day03.Day, Day03.Input, Day03.Solve1, Day03.Solve2);
-//Timing.Run(Day04.Day, Day04.Input, Day04.Solve1, Day04.Solve2);
-//Timing.Run(Day05.Day, Day05.Input, Day05.Solve1, Day05.Solve2);
-//Timing.Run(Day06.Day, Day06.Input, Day06.Solve1, Day06.Solve2);
-//Timing.Run(Day06.Day, Day07.Input, Day06.Solve1, Day06.Solve2);
+Timing.Run(Day01.Day, Day01.Input, Day01.Solve1, Day01.Solve2);
+Timing.Run(Day02.Day, Day02.Input, Day02.Solve1, Day02.Solve2);
+Timing.Run(Day03.Day, Day03.Input, Day03.Solve1, Day03.Solve2);
+Timing.Run(Day04.Day, Day04.Input, Day04.Solve1, Day04.Solve2);
+Timing.Run(Day05.Day, Day05.Input, Day05.Solve1, Day05.Solve2);
+Timing.Run(Day06.Day, Day06.Input, Day06.Solve1, Day06.Solve2);
+Timing.Run(Day07.Day, Day07.Input, Day07.Solve1, Day07.Solve2);
+Timing.Run(Day08.Day, Day08.Input, Day08.Solve1, Day08.Solve2);
+//Timing.Run(Day09.Day, Day09.Input, Day09.Solve1, Day09.Solve2); // Takes around 10 minutes
+Timing.Run(Day10.Day, Day10.Input, Day10.Solve1, Day10.Solve2);
+Timing.Run(Day11.Day, Day11.Input, Day11.Solve1, Day11.Solve2);
+Timing.Run(Day12.Day, Day12.Input, Day12.Solve1, Day12.Solve2);
 
 static public class Timing
 {
