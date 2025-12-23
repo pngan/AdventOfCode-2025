@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Accord.Math" Version="3.8.0" />
     <PackageReference Include="Microsoft.Z3" Version="4.12.2" />
     <PackageReference Include="morelinq" Version="4.4.0" />
   </ItemGroup>
