@@ -14,8 +14,8 @@ Timing.Run(Day05.Day, Day05.Input, Day05.Solve1, Day05.Solve2);
 Timing.Run(Day06.Day, Day06.Input, Day06.Solve1, Day06.Solve2);
 Timing.Run(Day07.Day, Day07.Input, Day07.Solve1, Day07.Solve2);
 Timing.Run(Day08.Day, Day08.Input, Day08.Solve1, Day08.Solve2);
-//Timing.Run(Day09.Day, Day09.Input, Day09.Solve1, Day09.Solve2);
-//Timing.Run(Day10.Day, Day10.Input, Day10.Solve1, Day10.Solve2);
+Timing.Run(Day09.Day, Day09.Input, Day09.Solve1, Day09.Solve2);
+Timing.Run(Day10.Day, Day10.Input, Day10.Solve1, Day10.Solve2);
 Timing.Run(Day11.Day, Day11.Input, Day11.Solve1, Day11.Solve2);
 Timing.Run(Day12.Day, Day12.Input, Day12.Solve1, Day12.Solve2);
 Timing.WriteReadmeTimings("README.md");
@@ -110,10 +110,21 @@ static public class Timing
                                     extracted = System.Net.WebUtility.HtmlDecode(re.Groups[1].Value).Trim();
                             }
 
+                            // Remove trailing space + three hyphens if present (e.g. "Secret Entrance ---")
                             if (!string.IsNullOrEmpty(extracted))
+                            {
+                                extracted = extracted.Trim();
+                                if (extracted.EndsWith(" ---", System.StringComparison.Ordinal))
+                                    extracted = extracted.Substring(0, extracted.Length - 4).TrimEnd();
                                 names[key] = extracted;
+                            }
                             else
-                                names[key] = title; // fallback to raw title
+                            {
+                                var fallback = title?.Trim() ?? "";
+                                if (fallback.EndsWith(" ---", System.StringComparison.Ordinal))
+                                    fallback = fallback.Substring(0, fallback.Length - 4).TrimEnd();
+                                names[key] = fallback; // fallback to raw title
+                            }
                         }
                     }
                     catch
