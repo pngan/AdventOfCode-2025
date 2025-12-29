@@ -50,8 +50,8 @@ static public class Timing
             table.AppendLine();
             table.AppendLine("## Timings");
             table.AppendLine();
-            table.AppendLine("| Day | Name | Part 1 (ms) | Part 2 (ms) |");
-            table.AppendLine("|---:|---|---:|---:|");
+            table.AppendLine("| Day | Name | Type | Part 1 (ms) | Part 2 (ms) |");
+            table.AppendLine("|---:|---|---|---:|---:|");
 
             // Attempt to fetch puzzle names from adventofcode.com (works in CI with network access).
             System.Collections.Generic.Dictionary<string, string> names = new();
@@ -137,6 +137,63 @@ static public class Timing
             {
                 // If HTTP client cannot be created or network is blocked, skip name fetching.
             }
+
+            // Detect problem type heuristically by scanning the day's source file.
+            System.Collections.Generic.Dictionary<string, string> types = new();
+            foreach (var e in _entries)
+                types[e.Day] = "";
+
+            try
+            {
+                foreach (var key in new System.Collections.Generic.List<string>(types.Keys))
+                {
+                    try
+                    {
+                        var dayStr = key;
+                        var path = $"code/day{dayStr}.cs";
+                        string src = System.IO.File.Exists(path) ? System.IO.File.ReadAllText(path) : string.Empty;
+                        var s = src.ToLowerInvariant();
+                        string t = "Unknown";
+
+                        if (string.IsNullOrWhiteSpace(s))
+                        {
+                            types[key] = t;
+                            continue;
+                        }
+
+                        if (s.Contains("dijkstra") || s.Contains("bfs") || s.Contains("dfs") || s.Contains("adjacent") || s.Contains("neighbors") || s.Contains("graph"))
+                            t = "Graph";
+                        else if (s.Contains("dp[") || s.Contains("dynamic programming") || s.Contains("memo") || s.Contains("memoize") || s.Contains("dynamic "))
+                            t = "Dynamic Programming";
+                        else if (s.Contains("regex") || s.Contains("match(") && s.Contains("regex"))
+                            t = "Regex";
+                        else if (s.Contains("grid") || s.Contains("rows") || s.Contains("columns") || s.Contains("point") || s.Contains("image") || s.Contains("pixel") || s.Contains("x,") || s.Contains("y,"))
+                            t = "Grid/Map";
+                        else if (s.Contains("permut") || s.Contains("combin") || s.Contains("factorial"))
+                            t = "Combinatorics";
+                        else if (s.Contains("stack") && s.Contains("push"))
+                            t = "Stack";
+                        else if (s.Contains("queue") || s.Contains("enqueue") || s.Contains("dequeue"))
+                            t = "Queue";
+                        else if (s.Contains("sort(") || s.Contains("orderby") || s.Contains("binarysearch") )
+                            t = "Sorting/Search";
+                        else if (s.Contains("bigint") || s.Contains("biginteger") || s.Contains("math") || s.Contains("sqrt(") || s.Contains("pow("))
+                            t = "Math";
+                        else if (s.Contains("parse(") || s.Contains("split('") || s.Contains("split(\",") )
+                            t = "Parsing";
+
+                        types[key] = t;
+                    }
+                    catch
+                    {
+                        // ignore per-day classification failures
+                    }
+                }
+            }
+            catch
+            {
+                // ignore overall failures
+            }
             foreach (var e in _entries)
             {
                 var name = "";
@@ -153,7 +210,14 @@ static public class Timing
                         display = $"[{display}]({url})";
                     }
                 }
-                table.AppendLine($"| {e.Day} | {display} | {e.Part1Ms} | {e.Part2Ms} |");
+
+                var type = "";
+                if (types.TryGetValue(e.Day, out var tt))
+                    type = tt ?? "";
+                if (!string.IsNullOrEmpty(type))
+                    type = type.Replace("|", "\\|");
+
+                table.AppendLine($"| {e.Day} | {display} | {type} | {e.Part1Ms} | {e.Part2Ms} |");
             }
             table.AppendLine();
             table.AppendLine("<!-- TIMINGS END -->");

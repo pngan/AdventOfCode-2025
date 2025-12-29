@@ -17,22 +17,21 @@ An example to get the input files for Year 2025 and Day 1 is:
 
 ## Timings
 
-| Day | Name | Part 1 (ms) | Part 2 (ms) |
-|---:|---|---:|---:|
-| 01 | [Secret Entrance](https://adventofcode.com/2025/day/1) | 0 | 13 |
-| 02 | [Gift Shop](https://adventofcode.com/2025/day/2) | 166 | 340 |
-| 03 | [Lobby](https://adventofcode.com/2025/day/3) | 3 | 2 |
-| 04 | [Printing Department](https://adventofcode.com/2025/day/4) | 35 | 359 |
-| 05 | [Cafeteria](https://adventofcode.com/2025/day/5) | 3 | 6 |
-| 06 | [Trash Compactor](https://adventofcode.com/2025/day/6) | 2 | 10 |
-| 07 | [Laboratories](https://adventofcode.com/2025/day/7) | 5 | 14 |
-| 08 | [Playground](https://adventofcode.com/2025/day/8) | 140 | 624 |
-| 09 | [Movie Theater](https://adventofcode.com/2025/day/9) | 5 | 219579 |
-| 10 | [Factory](https://adventofcode.com/2025/day/10) | 19 | 1927 |
-| 11 | [Reactor](https://adventofcode.com/2025/day/11) | 1 | 4 |
-| 12 | [Christmas Tree Farm](https://adventofcode.com/2025/day/12) | 0 | 0 |
+| Day | Name | Type | Part 1 (ms) | Part 2 (ms) |
+|---:|---|---|---:|---:|
+| 01 | [Secret Entrance](https://adventofcode.com/2025/day/1) | Math | 0 | 13 |
+| 02 | [Gift Shop](https://adventofcode.com/2025/day/2) | Parsing | 299 | 435 |
+| 03 | [Lobby](https://adventofcode.com/2025/day/3) | Grid/Map | 6 | 3 |
+| 04 | [Printing Department](https://adventofcode.com/2025/day/4) | Grid/Map | 67 | 806 |
+| 05 | [Cafeteria](https://adventofcode.com/2025/day/5) | Grid/Map | 4 | 13 |
+| 06 | [Trash Compactor](https://adventofcode.com/2025/day/6) | Grid/Map | 8 | 42 |
+| 07 | [Laboratories](https://adventofcode.com/2025/day/7) | Graph | 15 | 24 |
+| 08 | [Playground](https://adventofcode.com/2025/day/8) | Graph | 232 | 943 |
+| 11 | [Reactor](https://adventofcode.com/2025/day/11) | Dynamic Programming | 1 | 4 |
+| 12 | [Christmas Tree Farm](https://adventofcode.com/2025/day/12) | Parsing | 0 | 0 |
 
 <!-- TIMINGS END -->
+
 
 
 
