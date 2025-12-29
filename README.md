@@ -19,18 +19,21 @@ An example to get the input files for Year 2025 and Day 1 is:
 
 | Day | Name | Part 1 (ms) | Part 2 (ms) |
 |---:|---|---:|---:|
-| 01 | [Secret Entrance](https://adventofcode.com/2025/day/1) | 1 | 17 |
-| 02 | [Gift Shop](https://adventofcode.com/2025/day/2) | 268 | 444 |
-| 03 | [Lobby](https://adventofcode.com/2025/day/3) | 7 | 3 |
-| 04 | [Printing Department](https://adventofcode.com/2025/day/4) | 60 | 922 |
-| 05 | [Cafeteria](https://adventofcode.com/2025/day/5) | 4 | 21 |
-| 06 | [Trash Compactor](https://adventofcode.com/2025/day/6) | 7 | 39 |
-| 07 | [Laboratories](https://adventofcode.com/2025/day/7) | 18 | 41 |
-| 08 | [Playground](https://adventofcode.com/2025/day/8) | 326 | 747 |
-| 11 | [Reactor](https://adventofcode.com/2025/day/11) | 1 | 6 |
-| 12 | [Christmas Tree Farm](https://adventofcode.com/2025/day/12) | 1 | 0 |
+| 01 | [Secret Entrance](https://adventofcode.com/2025/day/1) | 0 | 13 |
+| 02 | [Gift Shop](https://adventofcode.com/2025/day/2) | 166 | 340 |
+| 03 | [Lobby](https://adventofcode.com/2025/day/3) | 3 | 2 |
+| 04 | [Printing Department](https://adventofcode.com/2025/day/4) | 35 | 359 |
+| 05 | [Cafeteria](https://adventofcode.com/2025/day/5) | 3 | 6 |
+| 06 | [Trash Compactor](https://adventofcode.com/2025/day/6) | 2 | 10 |
+| 07 | [Laboratories](https://adventofcode.com/2025/day/7) | 5 | 14 |
+| 08 | [Playground](https://adventofcode.com/2025/day/8) | 140 | 624 |
+| 09 | [Movie Theater](https://adventofcode.com/2025/day/9) | 5 | 219579 |
+| 10 | [Factory](https://adventofcode.com/2025/day/10) | 19 | 1927 |
+| 11 | [Reactor](https://adventofcode.com/2025/day/11) | 1 | 4 |
+| 12 | [Christmas Tree Farm](https://adventofcode.com/2025/day/12) | 0 | 0 |
 
 <!-- TIMINGS END -->
+
 
 
 
