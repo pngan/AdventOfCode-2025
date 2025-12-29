@@ -6,7 +6,6 @@ Console.WriteLine($"{Day12.Solve2(),20}");
 Console.WriteLine();
 Console.WriteLine();
 
-//Day03.Test();
 Timing.Run(Day01.Day, Day01.Input, Day01.Solve1, Day01.Solve2);
 Timing.Run(Day02.Day, Day02.Input, Day02.Solve1, Day02.Solve2);
 Timing.Run(Day03.Day, Day03.Input, Day03.Solve1, Day03.Solve2);
@@ -15,8 +14,8 @@ Timing.Run(Day05.Day, Day05.Input, Day05.Solve1, Day05.Solve2);
 Timing.Run(Day06.Day, Day06.Input, Day06.Solve1, Day06.Solve2);
 Timing.Run(Day07.Day, Day07.Input, Day07.Solve1, Day07.Solve2);
 Timing.Run(Day08.Day, Day08.Input, Day08.Solve1, Day08.Solve2);
-Timing.Run(Day09.Day, Day09.Input, Day09.Solve1, Day09.Solve2); // Takes around 10 minutes
-Timing.Run(Day10.Day, Day10.Input, Day10.Solve1, Day10.Solve2);
+//Timing.Run(Day09.Day, Day09.Input, Day09.Solve1, Day09.Solve2);
+//Timing.Run(Day10.Day, Day10.Input, Day10.Solve1, Day10.Solve2);
 Timing.Run(Day11.Day, Day11.Input, Day11.Solve1, Day11.Solve2);
 Timing.Run(Day12.Day, Day12.Input, Day12.Solve1, Day12.Solve2);
 Timing.WriteReadmeTimings("README.md");
@@ -51,11 +50,99 @@ static public class Timing
             table.AppendLine();
             table.AppendLine("## Timings");
             table.AppendLine();
-            table.AppendLine("| Day | Part 1 (ms) | Part 2 (ms) |");
-            table.AppendLine("|---:|---:|---:|");
+            table.AppendLine("| Day | Name | Part 1 (ms) | Part 2 (ms) |");
+            table.AppendLine("|---:|---|---:|---:|");
+
+            // Attempt to fetch puzzle names from adventofcode.com (works in CI with network access).
+            System.Collections.Generic.Dictionary<string, string> names = new();
             foreach (var e in _entries)
             {
-                table.AppendLine($"| {e.Day} | {e.Part1Ms} | {e.Part2Ms} |");
+                // ensure we have an entry for this day even if fetch fails
+                names[e.Day] = "";
+            }
+
+            try
+            {
+                using var http = new System.Net.Http.HttpClient();
+                http.DefaultRequestHeaders.UserAgent.ParseAdd("github-actions-aoc-timings/1.0");
+                var keys = new System.Collections.Generic.List<string>(names.Keys);
+                foreach (var key in keys)
+                {
+                    try
+                    {
+                        // Parse day number (allow leading zeros)
+                        if (!int.TryParse(key, out int dayNum))
+                            continue;
+                        var url = $"https://adventofcode.com/2025/day/{dayNum}";
+                        var html = http.GetStringAsync(url).GetAwaiter().GetResult();
+                        // Try to extract <title>...</title>
+                        var m = System.Text.RegularExpressions.Regex.Match(html, "<title>(.*?)</title>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+                        if (m.Success)
+                        {
+                            var title = System.Net.WebUtility.HtmlDecode(m.Groups[1].Value).Trim();
+                            string extracted = null;
+                            // Title often contains the year and day, e.g. "Advent of Code 2025 - Day 1: Report Repair"
+                            var idx = title.IndexOf(':');
+                            if (idx >= 0 && idx + 1 < title.Length)
+                            {
+                                extracted = title.Substring(idx + 1).Trim();
+                            }
+
+                            // If title didn't contain the puzzle name, try to find it in the page body.
+                            if (string.IsNullOrEmpty(extracted))
+                            {
+                                // Look for an <h2> that often contains the day and puzzle name.
+                                var h2 = System.Text.RegularExpressions.Regex.Match(html, "<h2[^>]*>(.*?)</h2>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+                                if (h2.Success)
+                                {
+                                    var h2text = System.Net.WebUtility.HtmlDecode(h2.Groups[1].Value).Trim();
+                                    var m2 = System.Text.RegularExpressions.Regex.Match(h2text, @":\s*(.*)$");
+                                    if (m2.Success)
+                                        extracted = m2.Groups[1].Value.Trim();
+                                }
+                            }
+
+                            // As a last resort, search for "Day <n>[:\-] <name>" in the HTML
+                            if (string.IsNullOrEmpty(extracted))
+                            {
+                                var re = System.Text.RegularExpressions.Regex.Match(html, $"Day\\s*{dayNum}\\s*[:\\-]\\s*(.*?)<", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+                                if (re.Success)
+                                    extracted = System.Net.WebUtility.HtmlDecode(re.Groups[1].Value).Trim();
+                            }
+
+                            if (!string.IsNullOrEmpty(extracted))
+                                names[key] = extracted;
+                            else
+                                names[key] = title; // fallback to raw title
+                        }
+                    }
+                    catch
+                    {
+                        // ignore per-day fetch failures and leave name blank
+                    }
+                }
+            }
+            catch
+            {
+                // If HTTP client cannot be created or network is blocked, skip name fetching.
+            }
+            foreach (var e in _entries)
+            {
+                var name = "";
+                if (names.TryGetValue(e.Day, out var n))
+                    name = n ?? "";
+                string display = name;
+                if (!string.IsNullOrEmpty(display))
+                {
+                    // Escape pipe and bracket characters for Markdown table/link safety
+                    display = display.Replace("|", "\\|").Replace("]", "\\]");
+                    if (int.TryParse(e.Day, out int dayNum))
+                    {
+                        var url = $"https://adventofcode.com/2025/day/{dayNum}";
+                        display = $"[{display}]({url})";
+                    }
+                }
+                table.AppendLine($"| {e.Day} | {display} | {e.Part1Ms} | {e.Part2Ms} |");
             }
             table.AppendLine();
             table.AppendLine("<!-- TIMINGS END -->");
