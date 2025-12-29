@@ -1,11 +1,15 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: Construct README
+
+permissions:
+  contents: write
 
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch: {}
 
 jobs:
   build:
@@ -13,14 +17,20 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v6.0.1
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Ensure 7zip is installed
+        if: runner.os == 'Windows'
+        run: choco install 7zip -y
       - name: Extract Input from 7z Archive
         env:
           ARCHIVE_PASSWORD: ${{ secrets.ARCHIVEPASSWORD }}
         run: |
           # Navigate to the input directory
-          Push-Location AdventOfCode.Solutions\Inputs
+          Push-Location input
           
           # Extract the 7z archive
           $secretValue = $env:ARCHIVE_PASSWORD
@@ -29,11 +39,32 @@ jobs:
           # Return to the original directory
           Pop-Location
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5.0.1
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: '10.0.x'
       - name: Restore dependencies
         run: dotnet restore
-      - name: Build Excutable
-        run: dotnet build --no-restore
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run timing runner
+        run: dotnet run --project AdventOfCode-2025.csproj --configuration Release --no-build
+
+      - name: Commit README changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          try { git add README.md } catch { }
+          $changes = git status --porcelain README.md
+          if ($changes) {
+            try { git commit -m "Update README timings" } catch { Write-Host "Commit failed" }
+            try { git push origin HEAD:main } catch { Write-Host "Push failed" }
+          } else {
+            Write-Host "No README changes to commit"
+          }
+
 
