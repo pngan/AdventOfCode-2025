@@ -19,18 +19,21 @@ An example to get the input files for Year 2025 and Day 1 is:
 
 | Day | Name | Type | Part 1 (ms) | Part 2 (ms) |
 |---:|---|---|---:|---:|
-| [01](code/day01.cs) | [Secret Entrance](https://adventofcode.com/2025/day/1) | Math | 0 | 14 |
-| [02](code/day02.cs) | [Gift Shop](https://adventofcode.com/2025/day/2) | Parsing | 289 | 626 |
-| [03](code/day03.cs) | [Lobby](https://adventofcode.com/2025/day/3) | Grid/Map | 7 | 3 |
-| [04](code/day04.cs) | [Printing Department](https://adventofcode.com/2025/day/4) | Grid/Map | 61 | 902 |
-| [05](code/day05.cs) | [Cafeteria](https://adventofcode.com/2025/day/5) | Grid/Map | 4 | 11 |
-| [06](code/day06.cs) | [Trash Compactor](https://adventofcode.com/2025/day/6) | Grid/Map | 5 | 25 |
-| [07](code/day07.cs) | [Laboratories](https://adventofcode.com/2025/day/7) | Graph | 13 | 35 |
-| [08](code/day08.cs) | [Playground](https://adventofcode.com/2025/day/8) | Graph | 377 | 819 |
-| [11](code/day11.cs) | [Reactor](https://adventofcode.com/2025/day/11) | Dynamic Programming | 1 | 10 |
-| [12](code/day12.cs) | [Christmas Tree Farm](https://adventofcode.com/2025/day/12) | Parsing | 1 | 0 |
+| [01](code/day01.cs) | [Secret Entrance](https://adventofcode.com/2025/day/1) | Math | 0 | 13 |
+| [02](code/day02.cs) | [Gift Shop](https://adventofcode.com/2025/day/2) | Parsing | 168 | 344 |
+| [03](code/day03.cs) | [Lobby](https://adventofcode.com/2025/day/3) | Grid/Map | 3 | 2 |
+| [04](code/day04.cs) | [Printing Department](https://adventofcode.com/2025/day/4) | Grid/Map | 36 | 364 |
+| [05](code/day05.cs) | [Cafeteria](https://adventofcode.com/2025/day/5) | Grid/Map | 3 | 8 |
+| [06](code/day06.cs) | [Trash Compactor](https://adventofcode.com/2025/day/6) | Grid/Map | 2 | 11 |
+| [07](code/day07.cs) | [Laboratories](https://adventofcode.com/2025/day/7) | Graph | 8 | 19 |
+| [08](code/day08.cs) | [Playground](https://adventofcode.com/2025/day/8) | Graph | 141 | 648 |
+| [09](code/day09.cs) | [Movie Theater](https://adventofcode.com/2025/day/9) | Grid/Map | 4 | 228323 |
+| [10](code/day10.cs) | [Factory](https://adventofcode.com/2025/day/10) | Parsing | 18 | 2028 |
+| [11](code/day11.cs) | [Reactor](https://adventofcode.com/2025/day/11) | Dynamic Programming | 1 | 4 |
+| [12](code/day12.cs) | [Christmas Tree Farm](https://adventofcode.com/2025/day/12) | Parsing | 0 | 0 |
 
 <!-- TIMINGS END -->
+
 
 
 
