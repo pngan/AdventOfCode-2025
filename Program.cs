@@ -217,7 +217,20 @@ static public class Timing
                 if (!string.IsNullOrEmpty(type))
                     type = type.Replace("|", "\\|");
 
-                table.AppendLine($"| {e.Day} | {display} | {type} | {e.Part1Ms} | {e.Part2Ms} |");
+                // Make the Day entry a link to the local source file in the repo (preserve leading zeros)
+                var dayLink = e.Day;
+                try
+                {
+                    var dayPath = $"code/day{e.Day}.cs";
+                    if (System.IO.File.Exists(dayPath))
+                        dayLink = $"[{e.Day}]({dayPath})";
+                }
+                catch
+                {
+                    // ignore filesystem issues and leave day as plain text
+                }
+
+                table.AppendLine($"| {dayLink} | {display} | {type} | {e.Part1Ms} | {e.Part2Ms} |");
             }
             table.AppendLine();
             table.AppendLine("<!-- TIMINGS END -->");
