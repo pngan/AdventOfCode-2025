@@ -139,26 +139,81 @@ static public class Timing
                             continue;
                         }
 
-                        if (s.Contains("dijkstra") || s.Contains("bfs") || s.Contains("dfs") || s.Contains("adjacent") || s.Contains("neighbors") || s.Contains("graph"))
-                            t = "Graph";
-                        else if (s.Contains("dp[") || s.Contains("dynamic programming") || s.Contains("memo") || s.Contains("memoize") || s.Contains("dynamic "))
-                            t = "Dynamic Programming";
-                        else if (s.Contains("regex") || s.Contains("match(") && s.Contains("regex"))
-                            t = "Regex";
-                        else if (s.Contains("grid") || s.Contains("rows") || s.Contains("columns") || s.Contains("point") || s.Contains("image") || s.Contains("pixel") || s.Contains("x,") || s.Contains("y,"))
-                            t = "Grid/Map";
-                        else if (s.Contains("permut") || s.Contains("combin") || s.Contains("factorial"))
-                            t = "Combinatorics";
-                        else if (s.Contains("stack") && s.Contains("push"))
-                            t = "Stack";
-                        else if (s.Contains("queue") || s.Contains("enqueue") || s.Contains("dequeue"))
-                            t = "Queue";
-                        else if (s.Contains("sort(") || s.Contains("orderby") || s.Contains("binarysearch") )
-                            t = "Sorting/Search";
-                        else if (s.Contains("bigint") || s.Contains("biginteger") || s.Contains("math") || s.Contains("sqrt(") || s.Contains("pow("))
-                            t = "Math";
-                        else if (s.Contains("parse(") || s.Contains("split('") || s.Contains("split(\",") )
+                        // Scored heuristic: accumulate signals for multiple categories and pick the strongest.
+                        var scores = new System.Collections.Generic.Dictionary<string, int>(System.StringComparer.OrdinalIgnoreCase);
+                        void AddScore(string name, int v)
+                        {
+                            if (v <= 0) return;
+                            if (!scores.ContainsKey(name)) scores[name] = 0;
+                            scores[name] += v;
+                        }
+
+                        int ContainsCount(params string[] toks)
+                        {
+                            var c = 0;
+                            foreach (var tok in toks)
+                                if (!string.IsNullOrEmpty(tok) && s.Contains(tok))
+                                    c++;
+                            return c;
+                        }
+
+                        AddScore("Graph", ContainsCount("dijkstra", "bfs", "dfs", "adjacent", "neighbors", "graph", "edge", "vertex", "shortest path", "astar", "priorityqueue", "priority queue"));
+                        AddScore("Dynamic Programming", ContainsCount("dp[", "dynamic programming", "memo", "memoize", "cache", "topdown", "bottomup"));
+                        AddScore("Regex", ContainsCount("regex", "match(", "matches(", "regexoptions"));
+                        AddScore("Grid/Map", ContainsCount("grid", "rows", "columns", "point", "image", "pixel", "manhattan", "neighbors", "adjacent", "heightmap", "floodfill"));
+                        AddScore("Simulation", ContainsCount("simulate", "simulation", "step", "ticks", "turns", "evolve", "state", "nextstate", "applyrules", "runsteps"));
+
+                        var bitCount = 0;
+                        if (s.Contains("<<")) bitCount++;
+                        if (s.Contains(">>")) bitCount++;
+                        if (s.Contains(" & ") || s.Contains("&(")) bitCount++;
+                        if (s.Contains(" ^ ")) bitCount++;
+                        if (s.Contains("popcount") || s.Contains("countbits") || s.Contains("bitcount")) bitCount++;
+                        if (s.Contains("mask") || s.Contains("bits")) bitCount++;
+                        AddScore("Bitwise", bitCount);
+
+                        AddScore("Math", ContainsCount("bigint", "biginteger", "gcd", "lcm", "sqrt(", "pow(", "mod", "prime", "primes", "log("));
+                        AddScore("Combinatorics", ContainsCount("permut", "combin", "factorial", "nchoosek", "choose(", "binomial"));
+                        AddScore("Search/Backtracking", ContainsCount("backtrack", "backtracking", "bruteforce", "dfs(", "search("));
+                        AddScore("Sorting/Search", ContainsCount("sort(", "orderby", "binarysearch"));
+                        AddScore("Queue", ContainsCount("queue", "enqueue", "dequeue"));
+                        AddScore("Stack", ContainsCount("stack", "push", "pop"));
+                        AddScore("Union-Find", ContainsCount("unionfind", "disjoint set", "dsu", "union find"));
+
+                        // Parsing should be a fallback — only chosen when stronger signals are absent.
+                        var parseSignals = 0;
+                        if (s.Contains("parse(") || s.Contains("tryparse") || s.Contains("string.split") || s.Contains("split(") || s.Contains("split('") || s.Contains("split(\"") )
+                            parseSignals = 1;
+                        AddScore("Parsing", parseSignals);
+
+                        // Choose best-scoring category. If there's a tie, prefer more specific categories by ordering.
+                        var bestKey = (string?)null;
+                        var bestVal = 0;
+                        foreach (var kv in scores)
+                        {
+                            if (kv.Value > bestVal)
+                            {
+                                bestVal = kv.Value;
+                                bestKey = kv.Key;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(bestKey) && bestVal > 0)
+                        {
+                            // If the only signal is "Parsing" but other categories had 0, prefer Unknown unless parseSignals present.
+                            if (bestKey == "Parsing" && bestVal == parseSignals && bestVal == 1)
+                                t = "Parsing";
+                            else
+                                t = bestKey;
+                        }
+                        else if (parseSignals > 0)
+                        {
                             t = "Parsing";
+                        }
+                        else
+                        {
+                            t = "Unknown";
+                        }
 
                         types[key] = t;
                     }
